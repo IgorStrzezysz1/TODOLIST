@@ -24,6 +24,7 @@ abstract class ToDoKDatabase: RoomDatabase() {
                     klass = ToDoKDatabase::class.java,
                     name = "MyDatabase"
                 )
+                    .allowMainThreadQueries()
                     .build()
                     .also {
                         Instance = it

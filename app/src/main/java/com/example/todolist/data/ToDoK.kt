@@ -7,7 +7,7 @@ import java.time.Instant
 @Entity(tableName = "Stuff_ToDo")
 data class ToDoK(
     @PrimaryKey
-    val id: Int?,
+    val id: Int? = null,
 
     val title: String,
 

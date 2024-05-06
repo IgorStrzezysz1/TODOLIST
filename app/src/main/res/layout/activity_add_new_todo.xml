@@ -46,27 +46,39 @@
         app:layout_constraintTop_toBottomOf="@+id/edTitle" />
 
     <EditText
-        android:id="@+id/EDDeadine"
+        android:id="@+id/edtYear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:ems="10"
-        android:hint="DeadLine"
-        android:inputType="date"
+        android:hint="year"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edDescription" />
 
     <EditText
-        android:id="@+id/edTime"
+        android:id="@+id/edtMonth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:ems="10"
-        android:hint="Time"
-        android:inputType="time"
+        android:hint="month"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EDDeadine" />
+        app:layout_constraintTop_toBottomOf="@+id/edtYear" />
+
+    <EditText
+        android:id="@+id/edtDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:ems="10"
+        android:hint="day"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtMonth" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
