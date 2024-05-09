@@ -44,11 +44,6 @@ class AddNewTodoActivity : AppCompatActivity() {
             var day = findViewById<TextView>(R.id.edtDay).text
 
             if (title.isNotBlank() && description.isNotBlank() && year.isNotBlank() && month.isNotBlank() && day.isNotBlank()) {
-//                if (day.toString().toInt() < 10)
-//                    day = "0$day"
-//                if(month.toString().toInt()<10)
-//                    month="0$month"
-
                 val toDoK = ToDoK(
                     title = title.toString(),
                     description = description.toString(),
@@ -59,15 +54,14 @@ class AddNewTodoActivity : AppCompatActivity() {
                         month.toString().toInt(),
                         day.toString().toInt()
                     ).atStartOfDay()
-//                        .atStartOfDay(
-//                        ZoneId.systemDefault()
-//                    )
                         .toInstant(ZoneOffset.UTC)
                 )
 
                 lifecycleScope.launch {
                     toDoKDatabase.toDoKAO().insert(toDoK)
                 }
+
+
 
                 startActivity(Intent(this, MainActivity::class.java))
             }

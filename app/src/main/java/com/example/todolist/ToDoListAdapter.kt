@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todolist.data.ToDoK
 import com.google.android.material.transition.Hold
 
-class ToDoListAdapter(private val data: List<ToDoK>) : RecyclerView.Adapter<ToDoKViewHolder>() {
+class ToDoListAdapter(val data: MutableList<ToDoK>) : RecyclerView.Adapter<ToDoKViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToDoKViewHolder {
         val view =LayoutInflater.from(parent.context)
             .inflate(R.layout.item_task, parent, false)
@@ -19,6 +19,7 @@ class ToDoListAdapter(private val data: List<ToDoK>) : RecyclerView.Adapter<ToDo
 
     override fun onBindViewHolder(holder: ToDoKViewHolder, position: Int) {
         holder.nameTextView.text=data[position].title
+        holder.toDoKId = data[position].id
     }
 
 }

@@ -11,19 +11,18 @@ import androidx.room.Update
 interface ToDoKDAO {
 
     @Query("SELECT * FROM Stuff_ToDo")
-    suspend fun getAll() : List<ToDoK>
+    fun getAll() : List<ToDoK>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(toDoK: ToDoK)
 
     @Delete
-    suspend fun delete(toDoK: ToDoK)
+    fun delete(toDoK: ToDoK)
+
+    @Query("DELETE FROM Stuff_ToDo WHERE id = :id")
+    fun delete(id: Int)
 
     @Update
     suspend fun update(toDoK: ToDoK)
-
-//
-//    @Query("Delete FROM Stuff_ToDo WHERE :id=id")
-//    fun delete(id: Int)
 
 }

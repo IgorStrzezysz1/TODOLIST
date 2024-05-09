@@ -7,7 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolist.data.ToDoKDAO
 import com.example.todolist.data.ToDoKDatabase
@@ -37,23 +39,26 @@ class MainActivity : AppCompatActivity() {
 
         addButton = findViewById(R.id.addNewTask)
         taskList = findViewById(R.id.tasks)
-        lifecycleScope.launch {
-            val t = Toast(applicationContext)
-            t.setText(toDoKDAO.getAll().size.toString())
-            t.show()
 
-            taskList.adapter = ToDoListAdapter(toDoKDAO.getAll())
-        }
+        val linearLayoutManager = LinearLayoutManager(this)
+        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
+        taskList.layoutManager = linearLayoutManager
+
+        taskList.adapter = ToDoListAdapter(toDoKDAO.getAll().toMutableList())
 
         addButton.setOnClickListener {
             startActivity(Intent(this, AddNewTodoActivity::class.java))
         }
+
     }
 
     override fun onResume() {
         super.onResume()
-        lifecycleScope.launch {
-            taskList.adapter = ToDoListAdapter(toDoKDAO.getAll())
+
+        taskList.adapter?.let {
+            (it as ToDoListAdapter).data.clear()
+            it.data.addAll(toDoKDAO.getAll())
+            it?.notifyDataSetChanged()
         }
     }
 }
