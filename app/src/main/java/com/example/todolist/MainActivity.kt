@@ -13,9 +13,9 @@ import com.example.todolist.data.ToDoKDatabase
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var taskList: RecyclerView
-    private lateinit var addButton: FloatingActionButton
-    private lateinit var toDoKDAO: ToDoKDAO
+    internal lateinit var taskList: RecyclerView
+    internal lateinit var addButton: FloatingActionButton
+    internal lateinit var toDoKDAO: ToDoKDAO
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -30,22 +30,7 @@ class MainActivity : AppCompatActivity() {
                     }
             }
         }
-
-        toDoKDAO = ToDoKDatabase.getDataBase(applicationContext).toDoKAO()
-
-        addButton = findViewById(R.id.addNewTask)
-        taskList = findViewById(R.id.tasks)
-
-        val linearLayoutManager = LinearLayoutManager(this)
-        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
-        taskList.layoutManager = linearLayoutManager
-
-        taskList.adapter = ToDoListAdapter(toDoKDAO.getAll().toMutableList())
-
-        addButton.setOnClickListener {
-            startActivity(Intent(this, AddNewTodoActivity::class.java))
-        }
-
+        viewInit(this)
     }
 
     override fun onResume() {
@@ -58,3 +43,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+fun viewInit(activity: MainActivity){
+    activity.toDoKDAO = ToDoKDatabase.getDataBase(activity.applicationContext).toDoKAO()
+
+    activity.addButton = activity.findViewById(R.id.addNewTask)
+    activity.taskList = activity.findViewById(R.id.tasks)
+
+    val linearLayoutManager = LinearLayoutManager(activity)
+    linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
+    activity.taskList.layoutManager = linearLayoutManager
+
+    activity.taskList.adapter = ToDoListAdapter(activity.toDoKDAO.getAll().toMutableList())
+
+    activity.addButton.setOnClickListener {
+        activity.startActivity(Intent(activity, AddNewTodoActivity::class.java))
+}}
