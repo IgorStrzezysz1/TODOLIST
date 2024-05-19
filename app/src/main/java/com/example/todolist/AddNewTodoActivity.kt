@@ -1,7 +1,6 @@
 package com.example.todolist
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -14,12 +13,9 @@ import com.example.todolist.data.ToDoK
 import com.example.todolist.data.ToDoKDatabase
 import com.example.todolist.data.ToDokStatus
 import kotlinx.coroutines.launch
-import org.w3c.dom.Text
 import java.time.Instant
 import java.time.LocalDate
-import java.time.ZoneId
 import java.time.ZoneOffset
-import java.util.Date
 
 class AddNewTodoActivity : AppCompatActivity() {
 
@@ -41,29 +37,19 @@ class AddNewTodoActivity : AppCompatActivity() {
             val description = findViewById<TextView>(R.id.edDescription).text
             val year = findViewById<TextView>(R.id.edtYear).text
             var month = findViewById<TextView>(R.id.edtMonth).text
-            var day = findViewById<TextView>(R.id.edtDay).text
 
-            if (title.isNotBlank() && description.isNotBlank() && year.isNotBlank() && month.isNotBlank() && day.isNotBlank()) {
-                val toDoK = ToDoK(
-                    title = title.toString(),
-                    description = description.toString(),
-                    creationDate= Instant.now(),
-                    status = ToDokStatus.NOT_STARTED,
-                    deadlineDate = LocalDate.of(
-                        year.toString().toInt(),
-                        month.toString().toInt(),
-                        day.toString().toInt()
-                    ).atStartOfDay()
-                        .toInstant(ZoneOffset.UTC)
-                )
+            var day = findViewById<TextView>(R.id.edtDay).text
+            val toDoK=parseInput(title.toString(), description.toString(), year.toString(), month.toString(), day.toString())
 
                 lifecycleScope.launch {
-                    toDoKDatabase.toDoKAO().insert(toDoK)
+                    toDoK?.let { it1 ->
+                        toDoKDatabase.toDoKAO().insert(it1)
+
+
+                    }
                 }
-
-
-
-                startActivity(Intent(this, MainActivity::class.java))
+            if(toDoK !=null)
+            startActivity(Intent(this, MainActivity::class.java))
             }
         }
 

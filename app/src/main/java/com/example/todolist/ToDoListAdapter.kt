@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolist.data.ToDoK
-import com.google.android.material.transition.Hold
 
 class ToDoListAdapter(val data: MutableList<ToDoK>) : RecyclerView.Adapter<ToDoKViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToDoKViewHolder {
