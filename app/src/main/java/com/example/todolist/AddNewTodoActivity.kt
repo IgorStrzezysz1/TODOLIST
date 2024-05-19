@@ -9,13 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
-import com.example.todolist.data.ToDoK
 import com.example.todolist.data.ToDoKDatabase
-import com.example.todolist.data.ToDokStatus
 import kotlinx.coroutines.launch
-import java.time.Instant
-import java.time.LocalDate
-import java.time.ZoneOffset
 
 class AddNewTodoActivity : AppCompatActivity() {
 
@@ -55,5 +50,4 @@ class AddNewTodoActivity : AppCompatActivity() {
 
     }
 
-}
 
