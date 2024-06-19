@@ -7,9 +7,23 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolist.data.ToDoKDatabase
 
+/**
+ * class containing individual node, to-do lists.
+ */
 class ToDoKViewHolder(view:View): RecyclerView.ViewHolder(view){
+    /**
+     * name ToDoK
+     */
     val nameTextView: TextView
+
+    /**
+     * button that removes ToDoK from the database.
+     */
     val deleteButton: Button
+
+    /**
+     * ID ToDoK
+     */
     var toDoKId: Int? = null
     init {
         nameTextView = view.findViewById(R.id.taskName)
